@@ -1,0 +1,16 @@
+FROM node:18-alpine
+
+RUN apk add --no-cache libc6-compat
+
+WORKDIR /app
+
+COPY ./package.json ./yarn.lock ./
+
+RUN yarn install --pure-lockfile
+
+COPY . ./
+
+ARG HOST
+ARG NODE_ENV
+
+CMD yarn dev

@@ -1,0 +1,22 @@
+name: '[STAGING] Deploy docs'
+
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  deploy-docs:
+    uses: ./.github/workflows/deploy-base.yaml
+
+    with:
+      ENVIRONMENT: staging
+      ENVIRONMENT_URL: staging.tarrasque.app
+      KUBE_NAMESPACE: staging-docs
+      HELM_ARGS: |
+        --set ingress.annotations."cert-manager\.io/cluster-issuer"="letsencrypt-staging" \
+        --set ingress.hosts[0].host="staging.tarrasque.app",ingress.hosts[0].paths[0].path="/docs(/|$)(.*)",ingress.hosts[0].paths[0].pathType="Prefix" \
+        --set ingress.tls[0].secretName="tls-secret-docs",ingress.tls[0].hosts[0]="staging.tarrasque.app" \
+
+    secrets: inherit

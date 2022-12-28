@@ -1,0 +1,65 @@
+replicaCount: 1
+
+image:
+  repository:
+  pullPolicy: Always
+  tag: production
+
+imagePullSecrets:
+  - name: tarrasque
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  # Key to store randomized chart id to force redeployment
+  randomChartId: ""
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  hosts:
+    - host: tarrasque.app
+      paths:
+        - path: /docs(/|$)(.*)
+          pathType: Prefix
+    - host: www.tarrasque.app
+      paths:
+        - path: /docs(/|$)(.*)
+          pathType: Prefix
+  tls:
+    - secretName: tls-secret-docs
+      hosts:
+        - tarrasque.app
+        - www.tarrasque.app
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

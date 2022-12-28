@@ -1,0 +1,19 @@
+# Environment variables
+.env
+.env*
+!.env.example
+
+# Logs
+*.log
+logs
+
+# Node
+node_modules
+
+# Build
+.cache-loader
+.docusaurus
+.next
+build
+dist
+tsconfig.tsbuildinfo

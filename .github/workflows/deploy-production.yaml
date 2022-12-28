@@ -1,0 +1,23 @@
+name: '[PRODUCTION] Deploy docs'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-docs:
+    uses: ./.github/workflows/deploy-base.yaml
+
+    with:
+      ENVIRONMENT: production
+      ENVIRONMENT_URL: tarrasque.app
+      KUBE_NAMESPACE: production-docs
+      HELM_ARGS: |
+        --set ingress.annotations."cert-manager\.io/cluster-issuer"="letsencrypt-production" \
+        --set ingress.hosts[0].host="tarrasque.app",ingress.hosts[0].paths[0].path="/docs(/|$)(.*)",ingress.hosts[0].paths[0].pathType="Prefix" \
+        --set ingress.hosts[1].host="www.tarrasque.app",ingress.hosts[1].paths[0].path="/docs(/|$)(.*)",ingress.hosts[1].paths[0].pathType="Prefix" \
+        --set ingress.tls[0].secretName="tls-secret-docs",ingress.tls[0].hosts[0]="tarrasque.app",ingress.tls[0].hosts[1]="www.tarrasque.app" \
+
+    secrets: inherit
