@@ -49,6 +49,12 @@ ingress:
         - tarrasque.app
         - www.tarrasque.app
 
+env:
+  - name: HOST
+    value: "https://tarrasque.app"
+  - name: NODE_ENV
+    value: "production"
+
 resources: {}
 
 autoscaling:
