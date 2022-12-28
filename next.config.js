@@ -6,6 +6,12 @@ const withNextra = require('nextra')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  basePath: process.env.BASE_PATH || '',
+  env: {
+    // URL
+    HOST: process.env.HOST,
+    BASE_PATH: process.env.BASE_PATH || '',
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,

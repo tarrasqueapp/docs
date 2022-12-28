@@ -7,7 +7,7 @@ import { config } from './lib/config';
 const docsConfig: DocsThemeConfig = {
   logo: (
     <>
-      <img src={`${config.HOST}/images/logo.svg`} alt="Tarrasque Logo" width={50} />
+      <img src={`${config.HOST}${config.BASE_PATH}/images/logo.svg`} alt="Tarrasque Logo" width={50} />
       <Typography variant="h5" color="inherit" align="center" sx={{ ml: 1 }}>
         Tarrasque App
       </Typography>

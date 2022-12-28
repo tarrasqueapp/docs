@@ -1,15 +1,11 @@
 {
   // File associations
   "files.associations": {
-    "**/.env**": "properties",
-    "**/nginx/*.conf.*": "nginx"
+    "**/.env**": "properties"
   },
   // Formatting
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
-  },
   "[helm]": {
     "editor.defaultFormatter": "ms-kubernetes-tools.vscode-kubernetes-tools"
   },

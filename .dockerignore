@@ -15,7 +15,6 @@ logs
 
 # Build
 **/.cache-loader
-**/.docusaurus
 **/.next
 **/build
 **/dist

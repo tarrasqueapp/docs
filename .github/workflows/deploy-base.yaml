@@ -56,6 +56,7 @@ jobs:
           tags: ${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.ENVIRONMENT }}
           build-args: |
             HOST=https://${{ inputs.ENVIRONMENT_URL }}
+            BASE_PATH=/docs
             NODE_ENV=${{ secrets.NODE_ENV }}
           push: true
           cache-from: type=gha
@@ -70,6 +71,7 @@ jobs:
             --set image.repository=${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }} \
             --set image.tag=${{ inputs.ENVIRONMENT }} \
             --set env.HOST="https://${{ inputs.ENVIRONMENT_URL }}" \
+            --set env.BASE_PATH="/docs" \
             --set env.NODE_ENV="${{ secrets.NODE_ENV }}" \
             ${{ inputs.HELM_ARGS }}
 

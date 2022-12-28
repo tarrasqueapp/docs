@@ -11,6 +11,7 @@ RUN yarn install --pure-lockfile
 COPY . ./
 
 ARG HOST
+ARG BASE_PATH
 ARG NODE_ENV
 
 CMD yarn dev
