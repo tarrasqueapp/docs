@@ -1,7 +1,6 @@
 import { EmotionCache } from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import { CssBaseline, ThemeProvider } from '@mui/material';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ThemeProvider } from '@mui/material';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
@@ -32,6 +31,10 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps, emotionCache = clie
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="title" content="Tarrasque App" />
         <title>Tarrasque App</title>
+        {/* Don't index on staging environment */}
+        {/* {!EnvironmentUtils.isProduction() && <meta name="robots" content="noindex,nofollow" />} */}
+        {/* TODO: Change on launch */}
+        <meta name="robots" content="noindex,nofollow" />
       </Head>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
