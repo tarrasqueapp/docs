@@ -66,7 +66,7 @@ jobs:
 
       - name: Deploy to DigitalOcean Kubernetes
         run: |
-          helm upgrade --install ${{ env.HELM_CHART }} ./helm/${{ env.HELM_CHART }} --namespace ${{ inputs.KUBE_NAMESPACE }} --create-namespace \
+          helm upgrade --install ${{ env.HELM_CHART }} ./helm --namespace ${{ inputs.KUBE_NAMESPACE }} --create-namespace \
             --set image.repository=${{ secrets.REGISTRY }}/${{ env.IMAGE_NAME }} \
             --set image.tag=${{ inputs.ENVIRONMENT }} \
             --set env.HOST="https://${{ inputs.ENVIRONMENT_URL }}" \
